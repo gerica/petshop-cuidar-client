@@ -1,0 +1,211 @@
+<alert *ngFor="let alert of alertaUtil.alerts; let i = index" [type]="alert.type" dismissible="true" (close)="alertaUtil.closeAlert(i)">
+  {{ alert?.msg }}
+</alert>
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="page-header">
+        Relatório
+      </h2>
+      <ol class="breadcrumb">
+        <li>
+          <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" routerLink="/dashboard/home">Painel Inicial</a>
+        </li>
+        <li class="active">
+          <i class="fa fa-edit"></i> Relatório </li>
+      </ol>
+    </div>
+  </div>
+  <!-- /.row -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card card-block">
+        <tabset>
+          <tab heading="Vendas">
+            <form role="form" (submit)="consultar($event)" *ngIf="activeForm">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="card">
+                    <div class="card-header card-default">
+                      Consulta
+                    </div>
+                    <div class="card-block bg-white">
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <fieldset class="form-group">
+                            <label>Período:</label>
+                            <select class="form-control" id="periodoStr" name="periodoStr" [(ngModel)]="periodo" (change)="montarTela($event.target.value)">
+                            <option value="Selecione">Selecione</option>
+                            <option value="Mensal">Mensal</option>
+                            <option value="Bimestral">Bimestral</option>
+                            <option value="Trimestral">Trimestral</option>
+                            <option value="Simestral">Simestral</option>
+                            <option value="Anual">Anual</option>
+                            <option value="Livre">Livre</option>
+													</select>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-4" *ngIf="periodo === 'Mensal' || periodo === 'Bimestral'|| periodo === 'Trimestral'|| periodo === 'Simestral'|| periodo === 'Anual'">
+                          <fieldset class="form-group">
+                            <label>Anual:</label>
+                            <select class="form-control" id="anoStr" name="anoStr" [(ngModel)]="ano">
+                            <option value="0">Selecione</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>                            
+													</select>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-4" *ngIf="periodo === 'Mensal'">
+                          <fieldset class="form-group">
+                            <label>Mensal:</label>
+                            <select class="form-control" id="periodoValorStr" name="periodoValorStr" [(ngModel)]="periodoValor">
+                            <option value="00">Selecione</option>
+                            <option value="01">Janeiro</option>
+                            <option value="02">Fevereiro</option>
+                            <option value="03">Março</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Maio</option>
+                            <option value="06">Junho</option>
+                            <option value="07">Julho</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+													</select>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-4" *ngIf="periodo === 'Bimestral'">
+                          <fieldset class="form-group">
+                            <label>Bimestral:</label>
+                            <select class="form-control" id="periodoValorStr" name="periodoValorStr" [(ngModel)]="periodoValor">
+                            <option value="00">Selecione</option>
+                            <option value="01">Primeiro</option>
+                            <option value="02">Segundo</option>
+                            <option value="03">Terceiro</option>
+                            <option value="04">Quarto</option>
+                            <option value="05">Quinto</option>
+                            <option value="06">Sexto</option>
+													</select>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-4" *ngIf="periodo === 'Trimestral'">
+                          <fieldset class="form-group">
+                            <label>Trimestral:</label>
+                            <select class="form-control" id="periodoValorStr" name="periodoValorStr" [(ngModel)]="periodoValor">
+                            <option value="00">Selecione</option>
+                            <option value="01">Primeiro</option>
+                            <option value="02">Segundo</option>
+                            <option value="03">Terceiro</option>
+                            <option value="04">Quarto</option>
+													</select>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-4" *ngIf="periodo === 'Simestral'">
+                          <fieldset class="form-group">
+                            <label>Simestral:</label>
+                            <select class="form-control" id="periodoValorStr" name="periodoValorStr" [(ngModel)]="periodoValor">
+                            <option value="00">Selecione</option>
+                            <option value="01">Primeiro</option>
+                            <option value="02">Segundo</option>                            
+													</select>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-4" *ngIf="periodo === 'Livre'">
+                          <fieldset class="form-group">
+                            <label>Inicio:</label>
+                            <input type="date" class="form-control" id="dtInicioI" name="dtInicioI" [(ngModel)]="dtInicio">
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-4" *ngIf="periodo === 'Livre'">
+                          <fieldset class="form-group">
+                            <label>Final:</label>
+                            <input type="date" class="form-control" id="dfFinalI" name="dfFinalI" [(ngModel)]="dtFinal">
+                          </fieldset>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="periodo != 0">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Consultar</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div class="card card-block" *ngIf="relatorioVendas">
+              <div class="row">
+                <div class="col-sm-12">
+                  <input type="text" name="textoProcurado" class="form-control" placeholder="Filtrar Venda" #textoProcurado (keyup)="0">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="card">
+                    <div class="card-header card-default">
+                      Vendas
+                    </div>
+                    <div class="card-block bg-white">
+                      <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                          <div class="table-responsive">
+                            <table class="table table-hover table-sm">
+                              <thead>
+                                <tr>
+                                  <th>Venda</th>
+                                  <th>Desconto</th>
+                                  <th>Data Venda</th>
+                                  <th>Quantidae</th>
+                                  <th>Valor Total</th>
+                                  <th>Cliente</th>
+                                  <th>Usuário</th>
+                                  <th>Data Orçamento</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of relatorioVendas" (dblclick)="notifyRacaoEmit(item)">                                  
+                                  <td>{{item?.idVenda}}</td>
+                                  <td>{{item?.desconto /100 | percent}}</td>
+                                  <td>{{item?.dtVenda | date:'dd/MM/yyyy'}}</td>
+                                  <td>{{item?.quantidade}}</td>
+                                  <td>{{item?.valorTotal | currency:'BRL':true}}</td>
+                                  <td>{{item?.nomePessoa}}</td>
+                                  <td>{{item?.nomeUsuario}}</td>
+                                  <td>{{item?.dtOrcamento | date:'dd/MM/yyyy'}}</td>
+                                </tr>
+                              </tbody>
+                              <tfoot>
+                                <tr>
+                                  <td colspan="4">
+                                    <pagination-controls id="racaoLista" (pageChange)="p = $event" #api directionLinks="false" maxSize="9" autoHide="true"></pagination-controls>
+                                  </td>
+                                </tr>
+                              </tfoot>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </tab>
+          <tab heading="Orçamentos">
+
+          </tab>
+          <tab heading="Estoque">
+
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+  <!-- /.row -->
+</div>

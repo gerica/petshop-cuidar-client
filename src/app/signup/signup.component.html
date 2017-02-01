@@ -1,0 +1,43 @@
+<div class="login-page">
+	<div class="row">
+		<div class="col-lg-4 col-lg-offset-4">
+			<alert *ngFor="let alert of alertaUtil.alerts; let i = index" [type]="alert.type" dismissible="true" (close)="alertaUtil.closeAlert(i)">
+			    {{ alert?.msg }}
+			</alert>
+        	<img src="assets/img/SB-admin.png" width="150px;" class="user-avatar" />
+			<h1>PetShop - Cuidar</h1>
+			<form role="form" #registrarForm="ngForm" (submit)="registrar($event)">
+				<div class="form-content">
+					<div class="form-group">
+						<input type="text" class="form-control input-underline input-lg" id="username" name="username" [(ngModel)]="usuario.username"  placeholder="Nome Completo" required #username="ngModel">
+					</div>
+					 <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+                        O nome completo é obrigatório
+                    </div>
+
+					<div class="form-group">
+						<input type="email" class="form-control input-underline input-lg" id="email" name="email" [(ngModel)]="usuario.email" placeholder="Email" required #email=ngModel>
+					</div>
+					 <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                        O email é obrigatório
+                    </div>
+
+					<div class="form-group">
+						<input type="password" class="form-control input-underline input-lg" id="password" name="password" [(ngModel)]="usuario.password" placeholder="Password" required #password="ngModel">
+					</div>
+					 <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                        O email é obrigatório
+                    </div>
+					<div class="form-group">
+						<input type="password" class="form-control input-underline input-lg" id="passwordrp" name="passwordrp" [(ngModel)]="usuario.passwordrp" placeholder="Password" required #passwordrp="ngModel">
+					</div>
+					 <div [hidden]="passwordrp.valid || passwordrp.pristine" class="alert alert-danger">
+                        O email é obrigatório
+                    </div>
+				</div>				
+				<button type="submit" class="btn rounded-btn">Registar</button>
+				<a type="submit" class="btn rounded-btn" routerLink="/"> Log in </a>
+			</form>
+		</div>	
+	</div>
+</div>

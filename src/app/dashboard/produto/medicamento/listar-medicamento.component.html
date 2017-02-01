@@ -1,0 +1,60 @@
+<div class="card card-block">
+    <div class="row">
+        <div class="col-sm-12">
+            <input type="text" name="textoProcurado" class="form-control" placeholder="Filtrar Ração pelo nome" #textoProcurado (keyup)="0">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header card-default">
+                    Medicamentos
+                </div>
+                <div class="card-block bg-white">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Ações</th>
+                                            <th>Marca</th>
+                                            <th>Nome</th>
+                                            <th>Categoria</th>
+                                            <th>Porte</th>
+                                            <th>Idade</th>
+                                            <th>Tipo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of medicamentos | filtroPorMedicamento: textoProcurado.value | paginate: {id:'medicamentoLista', itemsPerPage: 10, currentPage: p }" (dblclick)="notifyMedicamentoEmit(item)">
+                                            <td>
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="notifyMedicamentoEmit(item)"></i>                                                
+                                            </td>
+                                            <td>{{item.marca}}</td>
+                                            <td>{{item.nome}}</td>
+                                            <td>{{item.categoria}}</td>
+                                            <td>{{item.porte}}</td>
+                                            <td>{{item.faixaIdade}}</td>
+                                            <td>
+                                                <span *ngFor="let tipo of item?.medicamentoTipoPet">
+                                                    {{tipo?.tipoPet?.dsNome}}<br></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="4">
+                                                <pagination-controls  id="medicamentoLista" (pageChange)="p = $event" #api directionLinks="false" maxSize="9" autoHide="true"></pagination-controls>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

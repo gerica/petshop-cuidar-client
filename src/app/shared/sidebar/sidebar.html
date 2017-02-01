@@ -1,0 +1,100 @@
+<button class="btn btn-default" id="toggle-sidebar" type="button" (click)="eventCalled()">
+    &#9776;
+</button>
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+    <ul class="list-group">
+        <a routerLink="/dashboard/home" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i> &nbsp; Painel inicial
+        </a>
+        <div class="nested-menu" *ngIf="isAdmin">
+            <a class="list-group-item" (click)="addExpandClass('pages1')">
+                <span><i class="fa fa-desktop"></i> &nbsp; Administrativo</span>
+            </a>
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages1' }" *ngIf="showMenu === 'pages1'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['cadastrar-usuario']" [routerLinkActive]="['router-link-active']" href><span><i class="fa fa-user-circle-o"></i>&nbsp;Funcionário</span></a>
+                    </li>
+                    <!--<li>
+                        <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" href><span><i class="fa fa-eye"></i>&nbsp;Perfíl</span></a>
+                    </li>-->
+                    <li>
+                        <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" href><span><i class="fa fa-file-pdf-o"></i>&nbsp;Relatório</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu" *ngIf="isVenda || isAdmin">
+            <a class="list-group-item" (click)="addExpandClass('pages2')">
+                <span><i class="fa fa-shopping-cart"></i> &nbsp; Vendas</span>
+            </a>
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages2' }" *ngIf="showMenu === 'pages2'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['vender-produto']" [routerLinkActive]="['router-link-active']" href><span>Produto</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['listar-orcamento']" [routerLinkActive]="['router-link-active']" href><span>Orçamentos</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu" *ngIf="isFinanceiro || isAdmin">
+            <a class="list-group-item" (click)="addExpandClass('pages3')">
+                <span><i class="fa fa-money"></i> &nbsp; Financeiro</span>
+            </a>
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages3' }" *ngIf="showMenu === 'pages3'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['relatorio-financeiro']" [routerLinkActive]="['router-link-active']" href><span>Relatórios</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu" *ngIf="isVenda || isAdmin">
+            <a class="list-group-item" (click)="addExpandClass('pages4')">
+                <span><i class="fa fa-user-circle"></i> &nbsp; Cliente</span>
+            </a>
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages4' }" *ngIf="showMenu === 'pages4'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['cadastrar-cliente']" [routerLinkActive]="['router-link-active']" href><span>Cadastro</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['listar-cliente']" [routerLinkActive]="['router-link-active']" href><span>Lista</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu" *ngIf="isEstoque || isAdmin">
+            <a class="list-group-item" (click)="addExpandClass('pages5')">
+                <span><i class="fa fa-inbox"></i> &nbsp; Estoque</span>
+            </a>
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages5' }" *ngIf="showMenu === 'pages5'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['manter-racao']" [routerLinkActive]="['router-link-active']" href><span>Ração</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['manter-medicamento']" [routerLinkActive]="['router-link-active']" href><span>Medicamentos</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu" *ngIf="isRelacionamento || isVenda || isAdmin">
+            <a class="list-group-item" (click)="addExpandClass('pages6')">
+                <span><i class="fa fa-handshake-o"></i> &nbsp; Relacionamento</span>
+            </a>
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages6' }" *ngIf="showMenu === 'pages6'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['manter-lembrete']" [routerLinkActive]="['router-link-active']" href><span>Lembrete</span></a>
+                    </li>                    
+                </ul>
+            </li>
+        </div>
+        <!--<a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-file-o"></i> &nbsp;Página em Branco
+        </a>-->
+    </ul>
+</nav>

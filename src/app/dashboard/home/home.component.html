@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <alert *ngFor="let alert of alertaUtil.alerts; let i = index" [type]="alert.type" dismissible="true" (close)="alertaUtil.closeAlert(i)">
+        {{ alert?.msg }}
+    </alert>
+    <h2 class="text-muted">Painel inicial <small>petShop Cuidar</small></h2>
+    <hr>
+    <div class="row">
+        <div class="col-xl-3 col-lg-6" *ngIf="isVenda || isRelacionamento || isAdmin">
+            <div class="card card-primary card-inverse">
+                <div class="card-header card-primary">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-handshake-o fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-xs-right">
+                            <div class="huge">{{qtdOrcamento}}</div>
+                            <div>Lembretes</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-default">
+                    <a  [routerLink]="['../manter-lembrete']" [routerLinkActive]="['router-link-active']" href>
+                        <span class="pull-xs-left">Detalhe</span>
+                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6" *ngIf="isVenda || isAdmin">
+            <div class="card card-warning card-inverse">
+                <div class="card-header card-warning">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-xs-right">
+                            <div class="huge">{{qtdOrcamento}}</div>
+                            <div>Orçamentos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-yellow">
+                    <a class="text-warning" [routerLink]="['../listar-orcamento']" [routerLinkActive]="['router-link-active']" href>
+                        <span class="pull-xs-left">Detalhes</span>
+                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<alert *ngFor="let alert of alertaUtil.alerts; let i = index" [type]="alert.type" dismissible="true" (close)="alertaUtil.closeAlert(i)">
+	{{ alert?.msg }}
+</alert>
+<div class="container-fluid">
+	<!-- Page Heading -->
+	<div class="row">
+		<div class="col-lg-12">
+			<h2 class="page-header">
+				Cliente
+			</h2>
+			<ol class="breadcrumb">
+				<li>
+					<i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" routerLink="/dashboard/home">Dashboard</a>
+				</li>
+				<li class="active">
+					<i class="fa fa-edit"></i> Cliente
+				</li>
+			</ol>
+		</div>
+	</div>
+	<!-- /.row -->
+	<div class="col-lg-12">
+		<div class="card card-block">
+
+			<tabset>
+				<tab heading="Cadastro">
+					<form role="form" (submit)="gravar($event)" *ngIf="activeClienteForm">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header card-default">
+										Cliente: {{pessoa?.nome}}
+									</div>
+									<div class="card-block bg-white">
+
+										<div class="row">
+
+											<div class="col-lg-6">
+												<fieldset class="form-group">
+													<label>Tipo de Pessoa:</label>
+													<select class="form-control" id="tipoPessoa" name="tipoPessoa" [(ngModel)]="pessoa.tipoPessoa" #tipoPessoa="ngModel" required>
+															<option value="FÍSICA">Física</option>
+															<option value="JURÍDICA">Jurídica</option>
+                                                	</select>
+												</fieldset>
+												<fieldset class="form-group">
+													<label>Nome:</label>
+													<input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="pessoa.nome" #nome="ngModel" required>
+												</fieldset>
+												<div [hidden]="nome.valid || nome.pristine" class="alert alert-danger">
+													A nome é obrigatório.
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<fieldset class="form-group" *ngIf="pessoa.tipoPessoa === 'FÍSICA'">
+													<label>Sexo:</label>
+													<select class="form-control" id="sexo" name="sexo" [(ngModel)]="pessoa.sexo" #sexo="ngModel" required>
+															<option value="HOMEN">Homen</option>
+															<option value="MULHER">Mulher</option>
+                                                    	</select>
+												</fieldset>
+												<fieldset class="form-group">
+													<label>Data Nascimento:</label>
+													<input type="date" class="form-control" id="dtNascimento" name="dtNascimento" [(ngModel)]="pessoaDtNascimento" #dtNascimento="ngModel"
+														required>
+												</fieldset>
+												<div [hidden]="dtNascimento.valid || dtNascimento.pristine" class="alert alert-danger">
+													A data é obrigatório.
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary">Gravar</button>
+									<button *ngIf="pessoa.id" type="button" class="btn btn-secondary" (click)="novo()">Novo</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</tab>
+				<tab heading="Endereço" *ngIf="pessoa.id">
+					<tab-endereco-cliente [pessoa]="pessoa" (notifyAlerta)="onNotifyAlerta($event)" ></tab-endereco-cliente>
+				</tab>
+				<tab heading="Telefones" *ngIf="pessoa.id">
+					<tab-telefone-cliente [pessoa]="pessoa" (notifyAlerta)="onNotifyAlerta($event)" ></tab-telefone-cliente>
+				</tab>
+				<tab heading="Documentos" *ngIf="pessoa.id">
+					<tab-documento-cliente [pessoa]="pessoa" (notifyAlerta)="onNotifyAlerta($event)" ></tab-documento-cliente>
+				</tab>
+				<tab heading="Pets" *ngIf="pessoa.id">
+					<tab-pet-cliente [pessoa]="pessoa" (notifyAlerta)="onNotifyAlerta($event)" ></tab-pet-cliente>
+				</tab>
+			</tabset>
+
+
+		</div>
+	</div>
+	<!-- /.row -->
+</div>

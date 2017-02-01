@@ -1,0 +1,170 @@
+<alert *ngFor="let alert of alertaUtil.alerts; let i = index" [type]="alert.type" dismissible="true" (close)="alertaUtil.closeAlert(i)">
+	{{ alert?.msg }}
+</alert>
+<div class="container-fluid">
+	<!-- Page Heading -->
+	<div class="row">
+		<div class="col-lg-12">
+			<h2 class="page-header">
+				Ração
+			</h2>
+			<ol class="breadcrumb">
+				<li>
+					<i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" routerLink="/dashboard/home">Dashboard</a>
+				</li>
+				<li class="active">
+					<i class="fa fa-edit"></i> Ração
+				</li>
+			</ol>
+		</div>
+	</div>
+	<!-- /.row -->
+	<div class="row">
+	<div class="col-lg-12">
+		<div class="card card-block">
+			<tabset>
+				<tab heading="Cadastro">
+					<form role="form" (submit)="gravar($event)" *ngIf="activeForm">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header card-default">
+										Ração:
+									</div>
+									<div class="card-block bg-white">
+										<div class="row">
+											<div class="col-lg-4">
+												<fieldset class="form-group">
+													<label>Marca:</label>
+													<input type="text" class="form-control" id="marca" name="marca" [(ngModel)]="racao.marca" #marca="ngModel" required>
+												</fieldset>
+												<div [hidden]="marca.valid || marca.pristine" class="alert alert-danger">
+													A marca é obrigatório.
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<fieldset class="form-group">
+													<label>Nome:</label>
+													<input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="racao.nome" #nome="ngModel" required>
+												</fieldset>
+												<div [hidden]="nome.valid || nome.pristine" class="alert alert-danger">
+													A nome é obrigatório.
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<fieldset class="form-group">
+													<label>Tipo Pet</label>
+													<select class="form-control" id="tipoPet" name="tipoPet" [(ngModel)]="racao.tipoPet" #tipoPet="ngModel" required>
+														<option *ngFor="let t of tiposPet" [ngValue]="t">{{t.dsNome}}</option>
+													</select>
+												</fieldset>
+												<div [hidden]="tipoPet.valid || tipoPet.pristine" class="alert alert-danger">
+													A Tipo Pet é obrigatório.
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-4">
+												<fieldset class="form-group">
+													<label>Linha</label>
+													<select class="form-control" id="linha" name="linha" [(ngModel)]="racao.linha" #linha="ngModel" required>
+														<option *ngFor="let t of linhas" [ngValue]="t">{{t}}</option>
+													</select>
+												</fieldset>
+												<div [hidden]="linha.valid || linha.pristine" class="alert alert-danger">
+													A linha é obrigatório.
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<fieldset class="form-group">
+													<label>Porte da raça</label>
+													<select class="form-control" id="porte" name="porte" [(ngModel)]="racao.porte" #porte="ngModel" required>
+														<option *ngFor="let t of portes" [ngValue]="t">{{t}}</option>
+													</select>
+												</fieldset>
+												<div [hidden]="porte.valid || porte.pristine" class="alert alert-danger">
+													O porte da raça é obrigatório.
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<fieldset class="form-group">
+													<label>Idade</label>
+													<select class="form-control" id="faixaIdade" name="faixaIdade" [(ngModel)]="racao.faixaIdade" #faixaIdade="ngModel" required>
+														<option *ngFor="let t of idades" [ngValue]="t">{{t}}</option>
+													</select>
+												</fieldset>
+												<div [hidden]="faixaIdade.valid || faixaIdade.pristine" class="alert alert-danger">
+													A idade é obrigatório.
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary">Gravar</button>
+									<button *ngIf="racao.id" type="button" class="btn btn-secondary" (click)="novo()">Novo</button>
+									<button *ngIf="racao.id" type="button" class="btn btn-danger" (click)="showModalExcluir()">Excluir</button>
+								</div>
+							</div>
+						</div>
+					</form>
+					<listar-racao [addRacao]="addRacao" (notifyAlerta)="onNotifyAlerta($event)" (notifyRacao)="onNotifyRacao($event)"></listar-racao>
+				</tab>
+				<tab heading="Lotes" *ngIf="racao.id">
+					<tab-racao-lote [racao]="racao" (notifyAlerta)="onNotifyAlerta($event)" ></tab-racao-lote>
+				</tab>
+			</tabset>
+		</div>
+	</div>
+	</div>
+	<!-- /.row -->
+</div>
+
+
+<!-- Modal para apagar -->
+<div bsModal #modalExcluir="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<form role="form" (submit)="excluir($event)" *ngIf="racaoExcluir">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+								<div class="card-header card-default">
+									Ração que será excluido!
+									<button type="button" class="close" (click)="modalExcluir.hide()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+								</div>
+								<div class="card-block bg-white">
+									<div class="row">
+										<div class="col-lg-12">
+											<h4 class="list-group-item-heading">{{racaoExcluir?.nome}}</h4>
+											<p class="list-group-item-text">
+												<span>Marca: {{racaoExcluir?.marca}}</span><br>
+												<span>Tipo Pet: {{racaoExcluir?.tipoPet?.dsNome}}</span><br>
+												<span>Linha: {{racaoExcluir?.linha}}</span><br>
+												<span>Porte: {{racaoExcluir?.porte}}</span><br>
+												<span>Faixa Idade: {{racaoExcluir?.faixaIdade}}</span><br>
+											</p>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<button type="submit" class="btn btn-sm btn-primary">Confirmar</button>
+										<button type="button" class="btn btn-sm btn-warning" (click)="modalExcluir.hide()">Fechar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

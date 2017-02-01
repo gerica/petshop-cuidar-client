@@ -1,0 +1,36 @@
+<div class="login-page">
+	<div class="row">
+		<div class="col-lg-4 col-lg-offset-4">
+			<alert *ngFor="let alert of alertaUtil.alerts; let i = index" [type]="alert.type" dismissible="true" (close)="alertaUtil.closeAlert(i)">
+			    {{ alert?.msg }}
+			</alert>
+        	<img src="assets/img/SB-admin.png" width="150px;" class="user-avatar" />
+			<h1>Primeiro Login.<br> Alterar Senha</h1>
+			<form role="form" #registrarForm="ngForm" (submit)="salvar($event)">
+				<div class="form-content">				
+
+					<div class="form-group">
+						<input type="password" class="form-control input-underline input-lg" id="tempPassword" name="tempPassword" [(ngModel)]="usuario.tempPassword" placeholder="Senha Antiga" required #tempPassword=ngModel>
+					</div>
+					 <div [hidden]="tempPassword.valid || tempPassword.pristine" class="alert alert-danger">
+                        Senha antiga.
+                    </div>
+
+					<div class="form-group">
+						<input type="password" class="form-control input-underline input-lg" id="password" name="password" [(ngModel)]="usuario.password" placeholder="Nova Senha" required #password="ngModel">
+					</div>
+					 <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                        O senha é obrigatório
+                    </div>
+					<div class="form-group">
+						<input type="password" class="form-control input-underline input-lg" id="passwordrp" name="passwordrp" [(ngModel)]="usuario.passwordrp" placeholder="Repita a nova Senha" required #passwordrp="ngModel">
+					</div>
+					 <div [hidden]="passwordrp.valid || passwordrp.pristine" class="alert alert-danger">
+                        Digite a senha novamente
+                    </div>
+				</div>				
+				<button type="submit" class="btn rounded-btn">Salvar</button>				
+			</form>
+		</div>	
+	</div>
+</div>

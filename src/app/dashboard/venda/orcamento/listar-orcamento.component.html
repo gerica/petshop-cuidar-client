@@ -1,0 +1,144 @@
+<alert *ngFor="let alert of alertaUtil.alerts; let i = index" [type]="alert.type" dismissible="true" (close)="alertaUtil.closeAlert(i)">
+    {{ alert?.msg }}
+</alert>
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Orçamento
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" routerLink="/dashboard/home">Painel inicial</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Orçamentos
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card card-block">
+                <tabset>
+                    <tab heading="Lista">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <input type="text" name="textoProcurado" class="form-control" placeholder="Filtrar..." #textoProcurado (keyup)="0">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-header card-default">
+                                        Orçamentos
+                                    </div>
+                                    <div class="card-block bg-white">
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Ações</th>
+                                                                <th>Cliente</th>
+                                                                <th>Data</th>
+                                                                <th>Valor</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            
+                                                            <tr *ngFor="let item of orcamentos | filtroPorClienteOrcamento: textoProcurado.value  | paginate: { itemsPerPage: 10, currentPage: p }" (dblclick)="visualizar(item)">
+                                                                <td>
+                                                                    <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="getPaginaEditar(item)"></i>
+                                                                    <i class="fa fa-money" aria-hidden="true" title="Fechar Pedido" style="cursor:pointer" (click)="realizarVenda(item)"></i>
+																    <i class="fa fa-eye" aria-hidden="true" title="Visualizar" style="cursor:pointer" (click)="visualizar(item)"></i>
+                                                                </td>
+                                                                <td>{{item.pessoa.nome}}</td>
+                                                                <td>{{item.dtOrcamento | date: 'dd/MM/yyyy'}}</td>
+                                                                <td>{{item?.valorOrcamento | currency:'BRL':true}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td colspan="4">
+                                                                    <pagination-controls (pageChange)="p = $event" #api directionLinks="false" maxSize="10" autoHide="true"></pagination-controls>
+                                                                </td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6" *ngIf="orcamentoView">
+                                <div class="card">
+                                    <div class="card-header card-default">
+                                        Orçamento do cliente {{orcamentoView.pessoa.nome}}
+                                    </div>
+                                    <div class="card-block bg-white">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Data</th>
+                                                                <th>Desconto</th>
+                                                                <th>Valor</th>
+                                                                <th>Diferença</th>
+                                                                <th>Sem Desconto</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr >
+                                                                <td>{{orcamentoView?.dtOrcamento | date: 'dd/MM/yyyy'}}</td>
+                                                                <td>{{orcamentoView?.valorDesconto/100 | percent}}</td>
+                                                                <td>{{orcamentoView?.valorOrcamento | currency:'BRL':true}}</td>                                                                
+                                                                <td>{{orcamentoView?.valorOrcamentoSemDesconto - orcamentoView.valorOrcamento  | currency:'BRL':true}}</td>
+                                                                <td>{{orcamentoView?.valorOrcamentoSemDesconto | currency:'BRL':true}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Marca</th>
+                                                                <th>Nome</th>
+                                                                <th>Quantidade</th>
+                                                                <th>Valor</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let item of orcamentoView.itens; let i = index" [class.table-warning]="!item?.temLote">
+                                                                <td>{{item?.marca}}</td>
+                                                                <td>{{item?.nome}}</td>
+                                                                <td>{{item?.quantidadeVenda}}</td>
+                                                                <td>{{item?.quantidadeVenda * item?.valorVenda | currency:'BRL':true}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>

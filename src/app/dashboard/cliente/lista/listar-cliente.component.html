@@ -1,0 +1,252 @@
+<alert *ngFor="let alert of alertaUtil.alerts; let i = index" [type]="alert.type" dismissible="true" (close)="alertaUtil.closeAlert(i)">
+	{{ alert?.msg }}
+</alert>
+<div class="container-fluid">
+	<!-- Page Heading -->
+	<div class="row">
+		<div class="col-lg-12">
+			<h2 class="page-header">
+				Cliente
+			</h2>
+			<ol class="breadcrumb">
+				<li>
+					<i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" routerLink="/dashboard/home">Dashboard</a>
+				</li>
+				<li class="active">
+					<i class="fa fa-edit"></i> Cliente
+				</li>
+			</ol>
+		</div>
+	</div>
+	<!-- /.row -->
+	<div class="col-lg-12">
+		<div class="card card-block">
+			<tabset>
+				<tab heading="Lista">
+					<div class="row">
+						<div class="col-sm-12">
+							<input type="text" name="textoProcurado" class="form-control" placeholder="Filtrar Cliente pelo nome" #textoProcurado (keyup)="0">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+								<div class="card-header card-default">
+									Clientes
+								</div>
+
+								<div class="card-block bg-white">
+									<div class="row">
+										<div class="col-xl-12 col-lg-12">
+											<div class="table-responsive">
+												<table class="table table-hover table-sm">
+													<thead>
+														<tr>
+															<th>Ações</th>
+															<th>Nome</th>
+															<th>Tipo Pessoa</th>
+															<th>Data Nascimento</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let item of pessoas | filtroPorCliente: textoProcurado.value | paginate: { itemsPerPage: 10, currentPage: p }"
+															(dblclick)="showModalVisualizar(item)">
+															<td>
+																<i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="getPaginaEditar(item)"></i>
+																<i class="fa fa-eye" aria-hidden="true" title="Visualizar" style="cursor:pointer" (click)="showModalVisualizar(item)"></i>
+															</td>
+															<td>{{item.nome}}</td>
+															<td>{{item.tipoPessoa}}</td>
+															<td>{{item.dtNascimento | date: 'dd/MM/yyyy'}}</td>
+														</tr>
+													</tbody>
+													<tfoot>
+														<tr>
+															<td colspan="4">
+																<pagination-controls (pageChange)="p = $event" #api directionLinks="true" maxSize="9" autoHide="true"></pagination-controls>
+															</td>
+														</tr>
+													</tfoot>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</tab>
+			</tabset>
+		</div>
+	</div>
+	<!-- /.row -->
+</div>
+
+
+<!-- Modal visualizar -->
+<div bsModal #modalVisualizar="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog ">
+		<div class="modal-content" *ngIf="pessoaVisualizar">
+			<div class="modal-body">
+				<tabset>
+					<tab heading="Dados">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header card-default">
+										Cliente: {{pessoaVisualizar.nome}}
+										<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+									</div>
+									<div class="card-block bg-white">
+										<div class="row">
+											<div class="col-sm-10">
+												<div class="list-group">
+													<a href="javascript:;" class="list-group-item">
+														<h4 class="list-group-item-heading">{{pessoaVisualizar.nome}}</h4>
+														<p class="list-group-item-text">
+															<span> Tipo de pessoa: {{pessoaVisualizar.tipoPessoa}}<br> </span>
+															<span *ngIf="pessoaVisualizar.tipoPessoa === 'FÍSICA'"> Sexo: {{pessoaVisualizar.sexo}}<br></span>
+															<span>Data Nascimento: {{pessoaVisualizar.dtNascimento | date: 'dd/MM/yyyy'}}</span>
+														</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</tab>
+					<tab heading="Endereço">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header card-default">
+										Cliente: {{pessoaVisualizar.nome}}
+										<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+									</div>
+									<div class="card-block bg-white">
+										<div class="row" *ngFor="let item of enderecos; let i = index">
+											<div class="col-sm-10">
+												<div class="list-group">
+
+													<a href="javascript:;" class="list-group-item">
+														<h4 class="list-group-item-heading">{{item.logradouro}}</h4>
+														<p class="list-group-item-text">
+															{{item.cidade.descricao}}-{{item.cidade.estado.sigla}}
+															<br> CEP: {{item.cep}}
+															<br> Bairro:{{item.bairro}} - Número:{{item.numero}} - Complemento:{{item.complemento}} {{i % 2}}
+														</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</tab>
+					<tab heading="Telefone">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header card-default">
+										Cliente: {{pessoaVisualizar.nome}}
+										<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+									</div>
+									<div class="card-block bg-white">
+										<div class="row" *ngFor="let item of telefones;">
+											<div class="col-sm-10">
+												<div class="list-group">
+													<a href="javascript:;" class="list-group-item">
+														<h4 class="list-group-item-heading">Telefone</h4>
+														<p class="list-group-item-text">
+															{{item.numero}}
+														</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</tab>
+					<tab heading="Documento">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header card-default">
+										Cliente: {{pessoaVisualizar.nome}}
+										<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+									</div>
+									<div class="card-block bg-white">
+										<div class="row" *ngFor="let item of documentos;">
+											<div class="col-sm-10">
+												<div class="list-group">
+													<a href="javascript:;" class="list-group-item">
+														<h4 class="list-group-item-heading">{{item.tipoDocumento?.descricao}}</h4>
+														<p class="list-group-item-text">
+															{{item.numero}}
+															<span *ngIf="item.complemento">- {{item.complemento}}</span>
+														</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</tab>
+					<tab heading="Pets">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header card-default">
+										Cliente: {{pessoaVisualizar.nome}}
+										<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+									</div>
+									<div class="card-block bg-white">
+										<div class="row" *ngFor="let item of pets;">
+											<div class="col-sm-10">
+												<div class="list-group">
+													<a href="javascript:;" class="list-group-item">
+														<h4 class="list-group-item-heading">{{item?.dsNome}}</h4>
+														<p class="list-group-item-text">
+															<span> Tipo: {{item?.raca?.tipoPet?.dsNome}}<br></span>
+															<span> Raça: {{item?.raca?.dsNome}}<br></span>
+															<span> Data Nascimento: {{item?.dtNacimento | date: 'dd/MM/yyyy'}}</span>
+														</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</tab>
+				</tabset>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<button type="button" class="btn btn-primary" (click)="getPaginaEditar()">Editar</button>
+						<button type="button" class="btn btn-warning" (click)="modalVisualizar.hide()">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

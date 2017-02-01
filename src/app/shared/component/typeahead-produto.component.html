@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-header card-default">
+        Produto
+    </div>
+    <div class="card-block bg-white">
+        <input [(ngModel)]="asyncSelected" [typeahead]="dataSource" (typeaheadLoading)="changeTypeaheadLoading($event)"
+            (typeaheadNoResults)="changeTypeaheadNoResults($event)" (typeaheadOnSelect)="notifyProdutoEmit($event)" [typeaheadOptionsLimit]="7"
+            [typeaheadOptionField]="'nome'" [typeaheadMinLength]="3" placeholder="Informar o produto." class="form-control">
+
+        <div *ngIf="typeaheadLoading===true">
+            <i class="glyphicon glyphicon-refresh ng-hide" style=""></i>
+        </div>
+        <div *ngIf="typeaheadNoResults===true" class="" style="">
+            <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+        </div>
+    </div>
+</div>
