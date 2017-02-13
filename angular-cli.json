@@ -18,7 +18,7 @@
       "prefix": "petshop",
       "mobile": false,
       "styles": [
-        "styles.scss",        
+        "styles.scss",
         "../node_modules/font-awesome/css/font-awesome.css",
         "assets/sass/app.scss"
       ],

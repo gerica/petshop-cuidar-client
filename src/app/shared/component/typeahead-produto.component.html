@@ -7,11 +7,11 @@
             (typeaheadNoResults)="changeTypeaheadNoResults($event)" (typeaheadOnSelect)="notifyProdutoEmit($event)" [typeaheadOptionsLimit]="7"
             [typeaheadOptionField]="'nome'" [typeaheadMinLength]="3" placeholder="Informar o produto." class="form-control">
 
-        <div *ngIf="typeaheadLoading===true">
-            <i class="glyphicon glyphicon-refresh ng-hide" style=""></i>
+        <div *ngIf="typeaheadLoading===true">            
+            <i class="fa fa-spinner fa-pulse"></i>            
         </div>
-        <div *ngIf="typeaheadNoResults===true" class="" style="">
-            <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+        <div *ngIf="typeaheadNoResults===true" class="">
+            <i class="fa fa-exclamation-triangle"></i> Nenhum resultado encontrado.
         </div>
     </div>
 </div>

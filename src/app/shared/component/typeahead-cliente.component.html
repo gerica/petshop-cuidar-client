@@ -3,22 +3,26 @@
         Cliente
         <ul class="nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav">
             <li class="dropdown nav-item" dropdown>
-                <a [routerLink]="['/dashboard/cadastrar-cliente']" [routerLinkActive]="['router-link-active']" href tooltipPlacement="left" tooltip="Cadastrar novo Cliente.">
+                <a [routerLink]="['/dashboard/cadastrar-cliente']" [routerLinkActive]="['router-link-active']" href  tooltip="Cadastrar novo Cliente.">
                     <i class="fa fa-user"></i>
                 </a>
             </li>
         </ul>
     </div>
+   
     <div class="card-block bg-white">
         <input [(ngModel)]="asyncSelected" [typeahead]="dataSource" (typeaheadLoading)="changeTypeaheadLoading($event)"
             (typeaheadNoResults)="changeTypeaheadNoResults($event)" (typeaheadOnSelect)="notifyClienteEmit($event)" [typeaheadOptionsLimit]="7"
             [typeaheadOptionField]="'nome'" [typeaheadMinLength]="3" placeholder="Informar o nome do cliente." class="form-control">
 
-        <div *ngIf="typeaheadLoading===true">
-            <i class="glyphicon glyphicon-refresh ng-hide" style=""></i>
+        <div *ngIf="typeaheadLoading===true">            
+            <i class="fa fa-spinner fa-pulse"></i>            
         </div>
-        <div *ngIf="typeaheadNoResults===true" class="" style="">
-            <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
+        <div *ngIf="typeaheadNoResults===true">
+            <i class="fa fa-exclamation-triangle"></i> Nenhum resultado encontrado.            
+            <a [routerLink]="['/dashboard/cadastrar-cliente']" [routerLinkActive]="['router-link-active']">            
+                Cadastrar            
+            </a>
         </div>
     </div>
 </div>

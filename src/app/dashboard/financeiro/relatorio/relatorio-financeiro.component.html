@@ -168,7 +168,7 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr *ngFor="let item of relatorioVendas" (dblclick)="notifyRacaoEmit(item)">                                  
+                                <tr *ngFor="let item of relatorioVendas | paginate: {id:'relatorioFinanceiroLista', itemsPerPage: 10, currentPage: p }" (dblclick)="notifyRacaoEmit(item)">                                  
                                   <td>{{item?.idVenda}}</td>
                                   <td>{{item?.desconto /100 | percent}}</td>
                                   <td>{{item?.dtVenda | date:'dd/MM/yyyy'}}</td>
@@ -182,7 +182,7 @@
                               <tfoot>
                                 <tr>
                                   <td colspan="4">
-                                    <pagination-controls id="racaoLista" (pageChange)="p = $event" #api directionLinks="false" maxSize="9" autoHide="true"></pagination-controls>
+                                    <pagination-controls id="relatorioFinanceiroLista" (pageChange)="p = $event" #api directionLinks="false" maxSize="9" autoHide="true"></pagination-controls>
                                   </td>
                                 </tr>
                               </tfoot>
