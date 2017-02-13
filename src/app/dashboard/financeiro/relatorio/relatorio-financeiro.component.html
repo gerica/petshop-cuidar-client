@@ -157,6 +157,7 @@
                             <table class="table table-hover table-sm">
                               <thead>
                                 <tr>
+                                  <th>Opção</th>
                                   <th>Venda</th>
                                   <th>Desconto</th>
                                   <th>Data Venda</th>
@@ -169,6 +170,9 @@
                               </thead>
                               <tbody>
                                 <tr *ngFor="let item of relatorioVendas | paginate: {id:'relatorioFinanceiroLista', itemsPerPage: 10, currentPage: p }" (dblclick)="notifyRacaoEmit(item)">                                  
+                                  <td>                                    
+                                    <i class="fa fa fa-file-pdf-o" aria-hidden="true" title="Imprimir" style="cursor:pointer" (click)="imprimirItem(item)"></i>
+                                  </td>
                                   <td>{{item?.idVenda}}</td>
                                   <td>{{item?.desconto /100 | percent}}</td>
                                   <td>{{item?.dtVenda | date:'dd/MM/yyyy'}}</td>
