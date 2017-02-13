@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
         this.checkRole(JSON.parse(localStorage.getItem('usuario_')));
         this.recuperarQuantidadeOrcamento();
+        this.recuperarQuantidadeLembrete();
 
     }
 
@@ -78,7 +79,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.lembreteService.recuperarQuantidadeLembrete()
                 .subscribe(
                 data => {
-                    this.qtdOrcamento = data.objeto;
+                    this.qtdLembrete = data.objeto;
                 },
                 err => {
                     // Log errors if any
