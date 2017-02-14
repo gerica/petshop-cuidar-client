@@ -3,7 +3,10 @@ import { RelatorioFinanceiroService } from './../../../shared/service/financeiro
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
 import { Component, OnInit } from '@angular/core';
 // import jsPDF from 'jspdf';
+
 declare let jsPDF;
+declare let pdfMake: any;
+
 @Component({
   moduleId: module.id,
   selector: 'fa-relatorio-financiero',
@@ -62,30 +65,110 @@ export class RelatorioFinanceiroComponent implements OnInit {
   }
 
   public imprimirItem(item: RelatorioVenda) {
-    console.log(item);
-    var doc = new jsPDF();
-    doc.text(20, 20, 'Relatório de Financeiro');
-    // doc.addImage('../../assets/img/SB-admin','PNG',15,40,180,160)
-    
-    doc.text(20, 30, `Venda para o cliente: ${item.nomePessoa}.`);
-    doc.text(20, 40, 'This is the default font.')
-    doc.setFont('courier')
-    doc.setFontType('normal')
-    doc.text(20, 50, 'This is courier normal.')
-    doc.setFont('times')
-    doc.setFontType('italic')
-    doc.text(20, 60, 'This is times italic.')
-    doc.setFont('helvetica')
-    doc.setFontType('bold')
-    doc.text(20, 70, 'This is helvetica bold.')
-    doc.setFont('courier')
-    doc.setFontType('bolditalic')
-    doc.text(20, 80, 'This is courier bolditalic.')
-    doc.addPage();
-    doc.text(20, 90, `${item.idVenda}`);
+    // console.log(item);
 
-    // Save the PDF
-    doc.save(`${item.nomePessoa}.pdf`);
+    var dd = {
+      // a string or { width: number, height: number }
+      pageSize: 'A4',
+
+      // by default we use portrait, you can change it to landscape if you wish
+      pageOrientation: 'landscape',
+
+      // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+      pageMargins: [20, 20, 20, 20],
+      content: [
+        {
+          columns: [
+            {
+              style: 'header',
+              width: 50,
+              text: 'img'
+            }, {
+              style: 'header',
+              width: '*',
+              alignment: 'center',
+              text: `Relatório Financeiro - cliente: ${item.nomePessoa}`,
+            },
+          ]
+        }, {
+          text: `Venda`,
+          style: 'titulo',
+          alignment: 'center'
+        }, {
+          alignment: 'center',
+          table: {
+            widths: ['*', '*', '*', '*', '*', '*', '*', '*'],
+            body: [
+              [
+                'Venda',
+                'Desconto',
+                'Data Venda',
+                'Quantidade',
+                'Valor total',
+                'Cliente',
+                'Usuário',
+                'Data Orçamento'
+              ],
+              [
+                `${item.idVenda}`,
+                `${item.desconto}%`,
+                `${item.dtVenda}`,
+                `${item.quantidade}`,
+                `R$${item.valorTotal}`,
+                `${item.nomePessoa}`,
+                `${item.nomeUsuario}`,
+                `${item.dtOrcamento}`
+              ]
+            ]
+          }
+        }
+      ],
+      styles: {
+        header: {
+          fontSize: 24,
+          bold: true,
+          alignment: 'justify',
+          margin: [10, 0, 0, 50]
+          // left;top;right;bottom
+        },
+        titulo: {
+          fontSize: 14,
+          bold: true,
+          alignment: 'justify',
+          margin: [0, 0, 0, 30]
+        }
+      }
+    }
+    pdfMake.createPdf(dd).open();
+
+
+    // jspdf
+    // var doc = new jsPDF();
+    // doc.text(20, 20, 'Relatório de Financeiro');
+    // // doc.addImage('../../assets/img/SB-admin','PNG',15,40,180,160)
+
+    // doc.text(20, 30, `Venda para o cliente: ${item.nomePessoa}.`);
+    // doc.text(20, 40, 'This is the default font.')
+    // doc.setFont('courier')
+    // doc.setFontType('normal')
+    // doc.text(20, 50, 'This is courier normal.')
+    // doc.setFont('times')
+    // doc.setFontType('italic')
+    // doc.text(20, 60, 'This is times italic.')
+    // doc.setFont('helvetica')
+    // doc.setFontType('bold')
+    // doc.text(20, 70, 'This is helvetica bold.')
+    // doc.setFont('courier')
+    // doc.setFontType('bolditalic')
+    // doc.text(20, 80, 'This is courier bolditalic.')
+    // doc.line(20, 20, 60, 20)
+    // doc.setLineWidth(0.5)
+    // doc.addPage();
+    // doc.text(20, 90, `${item.idVenda}`);
+
+
+    // // Save the PDF
+    // doc.save(`${item.nomePessoa}.pdf`);
   }
 
   private validarConsulta(): boolean {
@@ -99,3 +182,4 @@ export class RelatorioFinanceiroComponent implements OnInit {
   }
 
 }
+

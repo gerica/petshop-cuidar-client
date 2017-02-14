@@ -14,7 +14,7 @@
         </li>
         <li class="active">
           <i class="fa fa-edit"></i> Relatório </li>
-      </ol>
+      </ol>      
     </div>
   </div>
   <!-- /.row -->
@@ -169,7 +169,7 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr *ngFor="let item of relatorioVendas | paginate: {id:'relatorioFinanceiroLista', itemsPerPage: 10, currentPage: p }" (dblclick)="notifyRacaoEmit(item)">                                  
+                                <tr *ngFor="let item of relatorioVendas | paginate: {id:'relatorioFinanceiroLista', itemsPerPage: 10, currentPage: p }" (dblclick)="imprimirItem(item)">                                  
                                   <td>                                    
                                     <i class="fa fa fa-file-pdf-o" aria-hidden="true" title="Imprimir" style="cursor:pointer" (click)="imprimirItem(item)"></i>
                                   </td>

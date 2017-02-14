@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate() {
-        console.log('AuthGuard', 'verificar');
+        // console.log('AuthGuard', 'verificar');
         if (this.semServidor) {
             return true;
         }

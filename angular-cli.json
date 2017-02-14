@@ -23,7 +23,9 @@
         "assets/sass/app.scss"
       ],
       "scripts": [
-        "../node_modules/jspdf/dist/jspdf.min.js"
+        "../node_modules/jspdf/dist/jspdf.min.js",
+        "../node_modules/pdfmake/build/pdfmake.min.js",
+        "../node_modules/pdfmake/build/vfs_fonts.js"
       ],
       "environments": {
         "source": "environments/environment.ts",
