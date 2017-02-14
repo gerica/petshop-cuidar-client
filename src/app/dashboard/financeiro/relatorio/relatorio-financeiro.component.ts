@@ -76,6 +76,11 @@ export class RelatorioFinanceiroComponent implements OnInit {
 
       // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
       pageMargins: [20, 20, 20, 20],
+      info: {
+        title: 'Relatorio Financeiro',
+        author: 'Rogério Cardoso',
+        subject: 'acompanhamento de vendas'
+      },
       content: [
         {
           columns: [
