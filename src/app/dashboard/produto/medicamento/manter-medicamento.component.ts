@@ -1,3 +1,5 @@
+import { MedicamentoLoteComponent } from './medicamento-lote.component';
+import { MedicamentoLote } from './../../../shared/entity/produto/medicamento-lote';
 import { ModalDirective } from 'ng2-bootstrap';
 import { MedicamentoService } from './../../../shared/service/produto/medicamento.service';
 import { TipoPetService } from './../../../shared/service/pet/tipo-pet.service';
@@ -24,7 +26,10 @@ export class ManterMedicamentoComponent implements OnInit {
     portes: string[];
     idades: string[];
     addMedicamento: number = 0;
-    @ViewChild('modalExcluir') public modalExcluir: ModalDirective;
+    @ViewChild('modalExcluir')
+    modalExcluir: ModalDirective;
+    @ViewChild(MedicamentoLoteComponent)
+    medicamentoLoteComponent: MedicamentoLoteComponent;
     medicamentoExcluir: Medicamento;
 
     /**
@@ -51,6 +56,7 @@ export class ManterMedicamentoComponent implements OnInit {
         this.activeForm = false;
         setTimeout(() => this.activeForm = true, 0);
         this.medicamento = new Medicamento();
+        this.medicamentoLoteComponent.inicialLista();
     }
 
     public onNotifyAlerta(message: any): void {

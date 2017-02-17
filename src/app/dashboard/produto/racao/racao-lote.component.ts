@@ -57,8 +57,11 @@ export class RacaoLoteComponent implements OnInit, OnChanges {
     public novo() {
         this.activeForm = false;
         setTimeout(() => this.activeForm = true, 0);
-        this.racaoLote = new RacaoLote();
+        this.racaoLote = new RacaoLote();        
+    }
 
+    public inicialListaLote(): void {
+        this.racaoLotes = [];
     }
 
     public gravar(event: any): void {

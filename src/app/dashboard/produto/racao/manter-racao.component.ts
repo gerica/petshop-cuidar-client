@@ -1,3 +1,5 @@
+import { URL_INCLUIR_USUARIO } from './../../../shared/service/usuario.service';
+import { RacaoLoteComponent } from './racao-lote.component';
 import { ModalDirective } from 'ng2-bootstrap';
 import { RacaoService } from './../../../shared/service/produto/racao.service';
 import { TipoPetService } from './../../../shared/service/pet/tipo-pet.service';
@@ -23,7 +25,10 @@ export class ManterRacaoComponent implements OnInit {
     portes: string[];
     idades: string[];
     addRacao: number = 0;
-    @ViewChild('modalExcluir') public modalExcluir: ModalDirective;
+    @ViewChild('modalExcluir') 
+    modalExcluir: ModalDirective;
+    @ViewChild(RacaoLoteComponent) 
+    racaoLoteComponent: RacaoLoteComponent;
     racaoExcluir: Racao;
 
     /**
@@ -49,7 +54,8 @@ export class ManterRacaoComponent implements OnInit {
     public novo() {
         this.activeForm = false;
         setTimeout(() => this.activeForm = true, 0);
-        this.racao = new Racao();
+        this.racao = new Racao();        
+        this.racaoLoteComponent.inicialListaLote();
     }
 
     public onNotifyAlerta(message: any): void {

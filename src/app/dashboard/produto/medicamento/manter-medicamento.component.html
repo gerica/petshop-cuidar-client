@@ -114,7 +114,7 @@
 					</form>
 					<listar-medicamento [addMedicamento]="addMedicamento" (notifyAlerta)="onNotifyAlerta($event)" (notifyMedicamento)="onNotifyMedicamento($event)"></listar-medicamento>
 				</tab>
-				<tab heading="Lotes" *ngIf="medicamento.id">
+				<tab heading="Lotes">
 					<tab-medicamento-lote [medicamento]="medicamento" (notifyAlerta)="onNotifyAlerta($event)" ></tab-medicamento-lote>
 				</tab>
 			</tabset>

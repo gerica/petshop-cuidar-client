@@ -54,6 +54,10 @@ export class MedicamentoLoteComponent implements OnInit, OnChanges {
         };
     }
 
+    public inicialLista(): void {
+        this.medicamentoLotes = [];
+    }
+
     public novo() {
         this.activeForm = false;
         setTimeout(() => this.activeForm = true, 0);
