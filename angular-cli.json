@@ -20,7 +20,8 @@
       "styles": [
         "styles.scss",
         "../node_modules/font-awesome/css/font-awesome.css",
-        "assets/sass/app.scss"
+        "assets/sass/app.scss",
+        "../node_modules/fullcalendar/dist/fullcalendar.min.css"
       ],
       "scripts": [        
         "../node_modules/pdfmake/build/pdfmake.min.js",

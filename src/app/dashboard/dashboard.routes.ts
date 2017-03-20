@@ -1,3 +1,4 @@
+import { AgendaRoutes } from './agenda/agenda.routes';
 import { AuthGuard } from './../common/auth.guard';
 import { RelatorioFinanceiroRoutes } from './financeiro/relatorio/relatorio-financeiro.routes';
 import { ManterLembreteRoutes } from './relacionamento/lembrete/manter-lembrete.routes';
@@ -27,7 +28,8 @@ export const DashboardRoutes: Route[] = [{
         ...ManterMedicamentoRoutes,
         ...ListarOrcamentoRoutes,
         ...ManterLembreteRoutes,
-        ...RelatorioFinanceiroRoutes
+        ...RelatorioFinanceiroRoutes,
+        ...AgendaRoutes
     ],
     canActivate: [AuthGuard]
 }];

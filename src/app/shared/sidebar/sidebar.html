@@ -6,6 +6,9 @@
         <a routerLink="/dashboard/home" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i> &nbsp; Painel inicial
         </a>
+        <a [routerLink]="['agenda']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-book"></i> &nbsp; Agenda
+        </a>
         <div class="nested-menu" *ngIf="isAdmin">
             <a class="list-group-item" (click)="addExpandClass('pages1')">
                 <span><i class="fa fa-desktop"></i> &nbsp; Administrativo</span>

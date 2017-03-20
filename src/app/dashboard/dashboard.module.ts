@@ -1,3 +1,4 @@
+import { AgendaModule } from './agenda/agenda.module';
 import { RelatorioFinanceiroModule } from './financeiro/relatorio/relatorio-financeiro.module';
 
 import { ManterLembreteModule } from './relacionamento/lembrete/manter-lembrete.module';
@@ -20,6 +21,7 @@ import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthGuard } from '../common/auth.guard';
 import { CadastrarUsuarioModule } from './cadastrar-usuario/cadastrar-usuario.module';
 import { CadastrarClienteModule } from './cliente/cadastro/cadastrar-cliente.module';
+import { AgendaComponent } from './agenda/agenda.component';
 
 @NgModule({
     imports: [
@@ -37,7 +39,8 @@ import { CadastrarClienteModule } from './cliente/cadastro/cadastrar-cliente.mod
         ManterMedicamentoModule,
         ListarOrcamentoModule,
         ManterLembreteModule,
-        RelatorioFinanceiroModule
+        RelatorioFinanceiroModule,
+        AgendaModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],
