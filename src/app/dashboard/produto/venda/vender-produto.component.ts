@@ -230,8 +230,10 @@ export class VenderProdutoComponent implements OnInit, OnDestroy {
     public calcularTotalVenda(): void {
         this.totalVenda = 0;
         this.itensVenda.forEach((e) => {
-            if (e.quantidadeVenda && e.valorVenda)
+            if (e.quantidadeVenda && e.valorVenda) {
                 this.totalVenda += e.quantidadeVenda * e.valorVenda;
+                e.valorVenda = e.quantidadeVenda * e.valorVenda;
+            }
         });
         this.calcularDesconto();
     }

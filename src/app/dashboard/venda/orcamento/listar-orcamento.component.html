@@ -55,7 +55,7 @@
                                                                 <td>
                                                                     <i class="fa fa-trash" aria-hidden="true" title="Apagar" style="cursor:pointer" (click)="showModalExcluir(item)"></i>
                                                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="getPaginaEditar(item)"></i>
-                                                                    <i class="fa fa-money" aria-hidden="true" title="Fechar Pedido" style="cursor:pointer" (click)="realizarVenda(item)"></i>
+                                                                    <i class="fa fa-money" aria-hidden="true" title="Fechar Pedido" style="cursor:pointer" (click)="showModalFecharPedido(item)"></i>
                                                                     <i class="fa fa-eye" aria-hidden="true" title="Visualizar" style="cursor:pointer" (click)="visualizar(item)"></i>
                                                                 </td>
                                                                 <td>{{item.pessoa.nome}}</td>
@@ -127,7 +127,8 @@
                                                                 <td>{{item?.marca}}</td>
                                                                 <td>{{item?.nome}}</td>
                                                                 <td>{{item?.quantidadeVenda}}</td>
-                                                                <td>{{item?.quantidadeVenda * item?.valorVenda | currency:'BRL':true}}</td>
+                                                                <!--<td>{{item?.quantidadeVenda * item?.valorVenda | currency:'BRL':true}}</td>-->
+                                                                <td>{{item?.valorVenda | currency:'BRL':true}}</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -176,6 +177,88 @@
                                     <div class="row">
                                         <button type="submit" class="btn btn-sm btn-primary">Confirmar</button>
                                         <button type="button" class="btn btn-sm btn-warning" (click)="modalExcluir.hide()">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para fechar pedido -->
+<div bsModal #modalFechar="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <form role="form" (submit)="realizarVenda($event)" *ngIf="orcamentoFechar">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header card-default">
+                                    Realizar venda do cliente: {{orcamentoFechar.pessoa.nome}}
+                                    <button type="button" class="close" (click)="modalFechar.hide()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="card-block bg-white">
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Data</th>
+                                                            <th>Desconto</th>
+                                                            <th>Valor</th>
+                                                            <th>Diferença</th>
+                                                            <th>Sem Desconto</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>{{orcamentoFechar?.dtOrcamento | date: 'dd/MM/yyyy'}}</td>
+                                                            <td>{{orcamentoFechar?.valorDesconto/100 | percent}}</td>
+                                                            <td>{{orcamentoFechar?.valorOrcamento | currency:'BRL':true}}</td>
+                                                            <td>{{orcamentoFechar?.valorOrcamentoSemDesconto - orcamentoFechar.valorOrcamento
+                                                                | currency:'BRL':true}}</td>
+                                                            <td>{{orcamentoFechar?.valorOrcamentoSemDesconto | currency:'BRL':true}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Marca</th>
+                                                            <th>Nome</th>
+                                                            <th>Quantidade</th>
+                                                            <th>Valor</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of orcamentoFechar.itens; let i = index" [class.table-warning]="!item?.temLote">
+                                                            <td>{{item?.marca}}</td>
+                                                            <td>{{item?.nome}}</td>
+                                                            <td>{{item?.quantidadeVenda}}</td>
+                                                            <td>{{item?.quantidadeVenda * item?.valorVenda | currency:'BRL':true}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-sm btn-primary">Confirmar</button>
+                                        <button type="button" class="btn btn-sm btn-warning" (click)="modalFechar.hide()">Fechar</button>
                                     </div>
                                 </div>
                             </div>

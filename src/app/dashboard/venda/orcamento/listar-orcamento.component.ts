@@ -17,9 +17,11 @@ export class ListarOrcamentoComponent implements OnInit {
     /*Variaveis*/
     alertaUtil: AlertaUtil = new AlertaUtil();
     @ViewChild('modalExcluir') public modalExcluir: ModalDirective;
+    @ViewChild('modalFechar') public modalFechar: ModalDirective;
     orcamentos: Orcamento[];
     orcamentoView: Orcamento;
     orcamentoExcluir: Orcamento;
+    orcamentoFechar: Orcamento;
 
     /**
      * Construtor
@@ -34,6 +36,7 @@ export class ListarOrcamentoComponent implements OnInit {
      * Método chamado quando esse componente iniciar
      */
     public ngOnInit(): void {
+        console.clear();
         this.orcamentos = [];
         this.recuperarTodos();
     }
@@ -85,9 +88,11 @@ export class ListarOrcamentoComponent implements OnInit {
 
     }
 
-    public realizarVenda(orcamento: Orcamento): void {
+    public realizarVenda(event: any): void {
+        console.log(event);
+        event.preventDefault();
 
-        this.vendaService.gravar(orcamento.id)
+        this.vendaService.gravar(this.orcamentoFechar.id)
             .subscribe(
             result => {
                 this.alertaUtil.addMessage({
@@ -97,6 +102,7 @@ export class ListarOrcamentoComponent implements OnInit {
                 });
                 this.recuperarTodos();
                 this.orcamentoView = null;
+                this.modalFechar.hide();
             },
             err => {
                 // Log errors if any
@@ -105,6 +111,7 @@ export class ListarOrcamentoComponent implements OnInit {
                     closable: true,
                     msg: err.message === undefined ? err : err.message
                 });
+                this.modalFechar.hide();
             });
 
     }
@@ -139,5 +146,10 @@ export class ListarOrcamentoComponent implements OnInit {
                 this.modalExcluir.hide();
             });
 
+    }
+
+    public showModalFecharPedido(orcamento: Orcamento): void {
+        this.orcamentoFechar = orcamento;
+        this.modalFechar.show();
     }
 }
