@@ -49,12 +49,14 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            
-                                                            <tr *ngFor="let item of orcamentos | filtroPorClienteOrcamento: textoProcurado.value  | paginate: { itemsPerPage: 10, currentPage: p }" (dblclick)="visualizar(item)">
+
+                                                            <tr *ngFor="let item of orcamentos | filtroPorClienteOrcamento: textoProcurado.value  | paginate: { itemsPerPage: 10, currentPage: p }"
+                                                                (dblclick)="visualizar(item)">
                                                                 <td>
+                                                                    <i class="fa fa-trash" aria-hidden="true" title="Apagar" style="cursor:pointer" (click)="showModalExcluir(item)"></i>
                                                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="getPaginaEditar(item)"></i>
                                                                     <i class="fa fa-money" aria-hidden="true" title="Fechar Pedido" style="cursor:pointer" (click)="realizarVenda(item)"></i>
-																    <i class="fa fa-eye" aria-hidden="true" title="Visualizar" style="cursor:pointer" (click)="visualizar(item)"></i>
+                                                                    <i class="fa fa-eye" aria-hidden="true" title="Visualizar" style="cursor:pointer" (click)="visualizar(item)"></i>
                                                                 </td>
                                                                 <td>{{item.pessoa.nome}}</td>
                                                                 <td>{{item.dtOrcamento | date: 'dd/MM/yyyy'}}</td>
@@ -95,11 +97,12 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr >
+                                                            <tr>
                                                                 <td>{{orcamentoView?.dtOrcamento | date: 'dd/MM/yyyy'}}</td>
                                                                 <td>{{orcamentoView?.valorDesconto/100 | percent}}</td>
-                                                                <td>{{orcamentoView?.valorOrcamento | currency:'BRL':true}}</td>                                                                
-                                                                <td>{{orcamentoView?.valorOrcamentoSemDesconto - orcamentoView.valorOrcamento  | currency:'BRL':true}}</td>
+                                                                <td>{{orcamentoView?.valorOrcamento | currency:'BRL':true}}</td>
+                                                                <td>{{orcamentoView?.valorOrcamentoSemDesconto - orcamentoView.valorOrcamento
+                                                                    | currency:'BRL':true}}</td>
                                                                 <td>{{orcamentoView?.valorOrcamentoSemDesconto | currency:'BRL':true}}</td>
                                                             </tr>
                                                         </tbody>
@@ -141,4 +144,45 @@
         </div>
     </div>
     <!-- /.row -->
+</div>
+
+
+<!-- Modal para apagar -->
+<div bsModal #modalExcluir="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <form role="form" (submit)="excluir($event)" *ngIf="orcamentoExcluir">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header card-default">
+                                    O orçamento será excluido:
+                                    <button type="button" class="close" (click)="modalExcluir.hide()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="card-block bg-white">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h4 class="list-group-item-heading">Apagar o orçamento do cliente: {{orcamentoExcluir.pessoa.nome}}</h4>
+                                            <p class="list-group-item-text">
+                                                <span>Data: {{orcamentoExcluir.dtOrcamento}}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-sm btn-primary">Confirmar</button>
+                                        <button type="button" class="btn btn-sm btn-warning" (click)="modalExcluir.hide()">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

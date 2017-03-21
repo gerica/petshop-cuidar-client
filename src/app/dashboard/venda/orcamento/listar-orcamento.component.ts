@@ -1,9 +1,10 @@
+import { ModalDirective } from 'ng2-bootstrap';
 import { VendaService } from './../../../shared/service/venda/venda.service';
 import { Router } from '@angular/router';
 import { Orcamento } from './../../../shared/entity/venda/orcamento';
 import { OrcamentoService } from './../../../shared/service/venda/orcamento.service';
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -15,8 +16,10 @@ import { Component, OnInit } from '@angular/core';
 export class ListarOrcamentoComponent implements OnInit {
     /*Variaveis*/
     alertaUtil: AlertaUtil = new AlertaUtil();
+    @ViewChild('modalExcluir') public modalExcluir: ModalDirective;
     orcamentos: Orcamento[];
     orcamentoView: Orcamento;
+    orcamentoExcluir: Orcamento;
 
     /**
      * Construtor
@@ -106,6 +109,35 @@ export class ListarOrcamentoComponent implements OnInit {
 
     }
 
+    public showModalExcluir(orcamento: Orcamento): void {
+        this.orcamentoExcluir = orcamento;
+        this.modalExcluir.show();
+    }
 
+    public excluir(event: any): void {
+        event.preventDefault();
+        this.orcamentoService.excluir(this.orcamentoExcluir.id)
+            .subscribe(
+            result => {
+                this.alertaUtil.addMessage({
+                    type: 'success',
+                    closable: true,
+                    msg: result.message
+                });
+                this.modalExcluir.hide();
+                this.recuperarTodos();
+                this.orcamentoView = null;
+                this.orcamentoExcluir = null;
+            },
+            err => {
+                // Log errors if any
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: err.message === undefined ? err : err.message
+                });
+                this.modalExcluir.hide();
+            });
 
+    }
 }

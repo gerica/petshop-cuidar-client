@@ -49,6 +49,7 @@ export class VenderProdutoComponent implements OnInit, OnDestroy {
      * Método chamado quando esse componente iniciar
      */
     public ngOnInit(): void {
+        console.clear();
         this.itensVenda = [];
         this.orcamento = new Orcamento();
         this.subscription = this.route.params.subscribe(params => {
@@ -190,7 +191,9 @@ export class VenderProdutoComponent implements OnInit, OnDestroy {
         itemVenda.tipoProduto = produto.tipoProduto;
 
         // dados do lote
-        if (lote.length > 0) {
+        console.log(lote);
+        if (this.validarLote(lote)) {
+            console.log(lote[0]);
             itemVenda.temLote = true;
             itemVenda.numero = lote[0].numero;
             itemVenda.dataLote = lote[0].dataLote;
@@ -300,6 +303,19 @@ export class VenderProdutoComponent implements OnInit, OnDestroy {
                 msg: 'Informe o cliente e os produtos.'
             });
         }
+    }
+
+    private validarLote(lote: any[]): boolean {
+        let retorno = false;
+        if (lote.length > 0) {
+            for (let l of lote) {
+                if (l.quantidade > 0) {
+                    retorno = true;
+                    break;
+                }
+            }
+        }
+        return retorno;
     }
 
 }
