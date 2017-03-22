@@ -62,12 +62,7 @@ export class ListarOrcamentoComponent implements OnInit {
     public calcularValorOrcamento(): void {
         if (this.orcamentos) {
             this.orcamentos.forEach(e => {
-                e.itens.forEach(i => {
-                    if (!e.valorOrcamento) {
-                        e.valorOrcamento = 0;
-                    }
-
-                    e.valorOrcamento += i.valorVenda;
+                e.itens.forEach(i => {                    
                     e.valorDesconto = i.desconto;
                     i.temLote = i.quantidade > 0;
                 });

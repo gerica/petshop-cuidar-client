@@ -116,7 +116,7 @@
                                                     <table class="table table-hover table-sm">
                                                         <thead>
                                                             <tr>
-                                                                <th>Marca</th>
+                                                                <th>Marca</th>	
                                                                 <th>Nome</th>
                                                                 <th>Quantidade</th>
                                                                 <th>Valor</th>
@@ -127,8 +127,8 @@
                                                                 <td>{{item?.marca}}</td>
                                                                 <td>{{item?.nome}}</td>
                                                                 <td>{{item?.quantidadeVenda}}</td>
-                                                                <!--<td>{{item?.quantidadeVenda * item?.valorVenda | currency:'BRL':true}}</td>-->
-                                                                <td>{{item?.valorVenda | currency:'BRL':true}}</td>
+                                                                <td>{{item?.quantidadeVenda * item?.valorVenda | currency:'BRL':true}}</td>
+                                                                <!--<td>{{item?.valorVenda | currency:'BRL':true}}</td>-->
                                                             </tr>
                                                         </tbody>
                                                     </table>

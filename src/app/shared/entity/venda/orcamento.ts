@@ -14,5 +14,5 @@ export class Orcamento {
     itens: ItemVenda[];
     valorOrcamento: number = 0;
     valorOrcamentoSemDesconto: number = 0;
-    valorDesconto: number = 0;
+    valorDesconto: number = 0;    
 }

@@ -157,6 +157,7 @@ export class VenderProdutoComponent implements OnInit, OnDestroy {
             .subscribe(
             data => {
                 this.orcamento = data.objeto;
+                console.log(this.orcamento);
                 this.carregarTelaEdicao();
             },
             err => {
@@ -232,7 +233,7 @@ export class VenderProdutoComponent implements OnInit, OnDestroy {
         this.itensVenda.forEach((e) => {
             if (e.quantidadeVenda && e.valorVenda) {
                 this.totalVenda += e.quantidadeVenda * e.valorVenda;
-                e.valorVenda = e.quantidadeVenda * e.valorVenda;
+                // e.valorVenda = e.quantidadeVenda * e.valorVenda;
             }
         });
         this.calcularDesconto();

@@ -67,8 +67,8 @@
                                                             <td>{{item?.nome}}</td>
                                                             <td>{{item?.quantidadeVenda}}</td>
                                                             <!--<td><input *ngIf="item?.temLote" type="number" class="form-control" style="width:50px;font-size: 13px" id="quantidade_i" name="quantidade_i" [(ngModel)]="item.quantidadeVenda" formControlName="quantidadeVenda"></td>-->
-                                                            <!--<td><span *ngIf="item?.temLote">{{item?.quantidadeVenda * item?.valorVenda | currency:'BRL':true}}</span></td>-->
-                                                            <td><span *ngIf="item?.temLote">{{item?.valorVenda | currency:'BRL':true}}</span></td>
+                                                            <td><span *ngIf="item?.temLote">{{item?.quantidadeVenda * item?.valorVenda | currency:'BRL':true}}</span></td>
+                                                            <!--<td><span *ngIf="item?.temLote">{{item?.valorVenda | currency:'BRL':true}}</span></td>-->
                                                         </tr>
                                                     </tbody>
                                                     <tfoot>
