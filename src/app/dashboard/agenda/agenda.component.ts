@@ -12,7 +12,6 @@ export class AgendaComponent implements OnInit {
   }
   
   calendarOptions: Object = {
-    height: 'parent',
     fixedWeekCount: false,
     defaultDate: '2016-09-12',
     editable: true,
