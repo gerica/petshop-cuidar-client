@@ -17,9 +17,11 @@ export class AuthGuard implements CanActivate {
         if (this.semServidor) {
             return true;
         }
-
+        // console.log(tokenNotExpired('id_token'));
+        // console.log(tokenNotExpired('token'));
+        // console.log(tokenNotExpired('access-token'));        
         //return tokenExistsAndNotExpired();
-        if (tokenNotExpired()) {
+        if (tokenNotExpired('id_token')) {
             return true;
         }
 

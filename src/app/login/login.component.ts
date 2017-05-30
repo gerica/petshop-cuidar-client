@@ -51,13 +51,17 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginSerice.login(this.usuario)
             .subscribe(
             result => {
+                console.log(result);
                 localStorage.setItem('id_token', result.token);
+                // localStorage.setItem('token', result.token);
+                // localStorage.setItem('access-token', result.token);
                 let usuarioLocal = result.usuario;
                 usuarioLocal.password = '';
                 localStorage.setItem('usuario_', JSON.stringify(usuarioLocal));
                 this.router.navigate(['/dashboard/home']);
             },
             err => {
+                console.log(err);
                 // Log errors if any
                 if (err.objeto && err.objeto.lock === true) {
                     this.router.navigate(['/primeiro-login', err.objeto.usuarioEmail]);
