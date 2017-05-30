@@ -2,7 +2,7 @@ import { RacaoLoteService } from './../../../shared/service/produto/racao-lote.s
 import { RacaoLote } from './../../../shared/entity/produto/racao-lote';
 import { Racao } from './../../../shared/entity/produto/racao';
 import { Component, OnInit, Output, Input, EventEmitter, OnChanges, ViewChild, SimpleChange } from '@angular/core';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
     moduleId: module.id,

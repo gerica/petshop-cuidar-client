@@ -1,6 +1,6 @@
 import { URL_INCLUIR_USUARIO } from './../../../shared/service/usuario.service';
 import { RacaoLoteComponent } from './racao-lote.component';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 import { RacaoService } from './../../../shared/service/produto/racao.service';
 import { TipoPetService } from './../../../shared/service/pet/tipo-pet.service';
 import { TipoPet } from './../../../shared/entity/pet/tipoPet';

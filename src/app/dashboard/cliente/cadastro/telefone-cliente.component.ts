@@ -2,7 +2,7 @@ import { Telefone } from './../../../shared/entity/pessoa/telefone';
 import { TelefoneService } from './../../../shared/service/pessoa/telefone.service';
 import { Component, OnInit, Output, Input, EventEmitter, OnChanges, SimpleChange, ViewChild } from '@angular/core';
 import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
     moduleId: module.id,

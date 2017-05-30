@@ -4,7 +4,7 @@ import { RoleService } from './../../shared/service/role.service';
 import { UsuarioService } from './../../shared/service/usuario.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertaUtil } from '../../shared/utils/alerta-util';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
     moduleId: module.id,

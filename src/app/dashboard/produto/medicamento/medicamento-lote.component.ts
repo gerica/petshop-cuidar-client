@@ -2,7 +2,7 @@ import { MedicamentoLoteService } from './../../../shared/service/produto/medica
 import { MedicamentoLote } from './../../../shared/entity/produto/medicamento-lote';
 import { Medicamento } from './../../../shared/entity/produto/medicamento';
 import { Component, OnInit, Output, Input, EventEmitter, OnChanges, ViewChild, SimpleChange } from '@angular/core';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
     moduleId: module.id,

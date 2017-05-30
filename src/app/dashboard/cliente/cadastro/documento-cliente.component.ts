@@ -4,7 +4,7 @@ import { Documento } from './../../../shared/entity/pessoa/documento';
 import { DocumentoService } from './../../../shared/service/pessoa/documento.service';
 import { Component, OnInit, Output, Input, EventEmitter, OnChanges, SimpleChange, ViewChild } from '@angular/core';
 import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
     moduleId: module.id,

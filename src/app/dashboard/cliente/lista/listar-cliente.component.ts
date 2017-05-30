@@ -12,7 +12,7 @@ import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
 import { PessoaService } from './../../../shared/service/pessoa/pessoa.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
     moduleId: module.id,

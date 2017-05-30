@@ -102,7 +102,7 @@ export class CadastrarClienteComponent implements OnInit, OnDestroy {
     }
 
     public parseDtNascimento(): void {
-        let dataLocal = new Date(this.pessoa.dtNascimento);
+        let dataLocal = this.pessoa.dtNascimento;
         let ano = dataLocal.toLocaleDateString().substring(6, 10);
         let mes = dataLocal.toLocaleDateString().substring(3, 5);
         let dia = dataLocal.toLocaleDateString().substring(0, 2);

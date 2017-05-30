@@ -5,7 +5,7 @@ import { CalendarComponent } from "angular2-fullcalendar/src/calendar/calendar";
 
 @NgModule({
     imports: [SharedModule],
-    declarations: [AgendaComponent, CalendarComponent],
+    declarations: [AgendaComponent],
 })
 
 export class AgendaModule { }

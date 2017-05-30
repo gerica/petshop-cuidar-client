@@ -7,8 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {
     AlertModule,
-    ButtonsModule,
-    DropdownModule,
+    ButtonsModule,    
     PaginationModule,
     ProgressbarModule,
     RatingModule,
@@ -16,7 +15,7 @@ import {
     TooltipModule,
     ModalModule,
     TypeaheadModule
-} from 'ng2-bootstrap';
+} from 'ngx-bootstrap';
 
 import { InputMaskCurrentDirective } from '../shared/directive/input-mask-current.directive';
 
@@ -25,8 +24,7 @@ import { InputMaskCurrentDirective } from '../shared/directive/input-mask-curren
         RouterModule,
         FormsModule,
         AlertModule.forRoot(),
-        ButtonsModule.forRoot(),
-        DropdownModule.forRoot(),
+        ButtonsModule.forRoot(),        
         PaginationModule.forRoot(),
         ProgressbarModule.forRoot(),
         RatingModule.forRoot(),
@@ -39,8 +37,7 @@ import { InputMaskCurrentDirective } from '../shared/directive/input-mask-curren
         TypeAheadProdutoComponent],
     exports: [CommonModule,
         AlertModule,
-        ButtonsModule,
-        DropdownModule,
+        ButtonsModule,        
         PaginationModule,
         ProgressbarModule,
         RatingModule,

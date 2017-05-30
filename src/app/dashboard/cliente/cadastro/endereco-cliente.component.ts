@@ -5,7 +5,7 @@ import { Cidade } from './../../../shared/entity/utils/cidade';
 import { Estado } from './../../../shared/entity/utils/estado';
 import { UtilsService } from './../../../shared/service/utils.service';
 import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
     moduleId: module.id,

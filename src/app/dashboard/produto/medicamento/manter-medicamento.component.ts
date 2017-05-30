@@ -1,6 +1,6 @@
 import { MedicamentoLoteComponent } from './medicamento-lote.component';
 import { MedicamentoLote } from './../../../shared/entity/produto/medicamento-lote';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 import { MedicamentoService } from './../../../shared/service/produto/medicamento.service';
 import { TipoPetService } from './../../../shared/service/pet/tipo-pet.service';
 import { TipoPet } from './../../../shared/entity/pet/tipoPet';

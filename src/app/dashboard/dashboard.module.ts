@@ -10,8 +10,7 @@ import { VenderProdutoModule } from './produto/venda/vender-produto.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { DropdownModule } from 'ng2-bootstrap';
-import { ModalModule } from 'ng2-bootstrap';
+import { ModalModule } from 'ngx-bootstrap';
 import { HomeModule } from './home/home.module';
 import { BlankPageModule } from './blank-page/blankPage.module';
 import { DashboardComponent } from './dashboard.component';
@@ -26,8 +25,7 @@ import { AgendaComponent } from './agenda/agenda.component';
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule,
-        DropdownModule,
+        RouterModule,        
         ModalModule,
         HomeModule,
         BlankPageModule,

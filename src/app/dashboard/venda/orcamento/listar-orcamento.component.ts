@@ -1,4 +1,4 @@
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 import { VendaService } from './../../../shared/service/venda/venda.service';
 import { Router } from '@angular/router';
 import { Orcamento } from './../../../shared/entity/venda/orcamento';

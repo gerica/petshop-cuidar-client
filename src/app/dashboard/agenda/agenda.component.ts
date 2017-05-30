@@ -10,8 +10,7 @@ export class AgendaComponent implements OnInit {
 
   ngOnInit() {
   }
-
-
+  
   calendarOptions: Object = {
     height: 'parent',
     fixedWeekCount: false,

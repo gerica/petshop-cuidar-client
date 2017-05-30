@@ -6,7 +6,7 @@ import { RacaService } from './../../../shared/service/pet/raca.service';
 import { TipoPetService } from './../../../shared/service/pet/tipo-pet.service';
 import { Component, OnInit, Output, Input, EventEmitter, OnChanges, SimpleChange, ViewChild } from '@angular/core';
 import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
     moduleId: module.id,

@@ -119,7 +119,7 @@ export class RelatorioPdf {
   }
 
   private formatDate(paramData: Date): string {
-    let dtLocal = new Date(paramData);
+    let dtLocal = paramData;
     let dia: string = dtLocal.getDate().toString();
     let mes: string = (dtLocal.getMonth() + 1).toString();
     var ano: string = dtLocal.getFullYear().toString();

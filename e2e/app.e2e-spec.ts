@@ -1,14 +1,14 @@
-import { PetshopCuidarClientPage } from './app.po';
+import { PetshopCuidarClientV120Page } from './app.po';
 
-describe('petshop-cuidar-client App', function() {
-  let page: PetshopCuidarClientPage;
+describe('petshop-cuidar-client-v120 App', () => {
+  let page: PetshopCuidarClientV120Page;
 
   beforeEach(() => {
-    page = new PetshopCuidarClientPage();
+    page = new PetshopCuidarClientV120Page();
   });
 
   it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('petshop works!');
+    expect(page.getParagraphText()).toEqual('app works!');
   });
 });

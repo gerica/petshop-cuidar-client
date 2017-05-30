@@ -1,7 +1,7 @@
 import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
 import { Lembrete } from './../../../shared/entity/relacionamento/lembrete';
 import { LembreteService } from './../../../shared/service/relacionamento/lembrete.service';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 import { TipoPetService } from './../../../shared/service/pet/tipo-pet.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
